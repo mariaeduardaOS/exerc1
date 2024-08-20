@@ -1,24 +1,24 @@
 public class Autor {
 
-    private int id;
+    private int idautor;
     private String nome;
     private String nacionalidade;
 
     public Autor() {
     }
 
-    public Autor(int id, String nome, String nacionalidade) {
-        this.id = id;
+    public Autor(int idautor, String nome, String nacionalidade) {
+        this.idautor = idautor;
         this.nome = nome;
         this.nacionalidade = nacionalidade;
     }
 
-    public int getId() {
-        return id;
+    public int getIdautor() {
+        return idautor;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int idautor) {
+        this.idautor = idautor;
     }
 
     public String getNome() {
@@ -46,13 +46,13 @@ public class Autor {
             return false;
         }
         Autor autor = (Autor) obj;
-        return id == autor.id && nome.equals(autor.nome) && nacionalidade.equals(autor.nacionalidade);
+        return idautor == autor.idautor && nome.equals(autor.nome) && nacionalidade.equals(autor.nacionalidade);
     }
 
     @Override
     public String toString() {
         return "Autor{" +
-                "id=" + id +
+                "idautor=" + idautor +
                 ", nome='" + nome + '\'' +
                 ", nacionalidade='" + nacionalidade + '\'' +
                 '}';
