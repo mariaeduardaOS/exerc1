@@ -6,7 +6,7 @@ public class livroDAO {
     private Connection connection;
 
     public livroDAO() throws SQLException {
-        this.connection = ConexaoBD.getInstance().getConnection();
+        this.connection = conexBD.getInstance().getConnection();
     }
 
     public void inserirlivro(livro livro) throws SQLException {
