@@ -42,4 +42,8 @@ public class livro {
     public void setIdautor(int idautor) {
         this.idautor = idautor;
     }
+
+    public String gettitulo() {
+        throw new UnsupportedOperationException("Unimplemented method 'gettitulo'");
+    }
 }
