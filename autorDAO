@@ -1,0 +1,85 @@
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import dao.ConexaoBD;
+
+public class AutorDAO {
+
+    private Connection connection;
+
+    public AutorDAO() {
+        connection = ConexaoBD.getInstance().getConnection(); 
+    }
+
+    public void inserir(Autor autor) throws SQLException {
+        String sql = "INSERT INTO Autor(Nome, Nacionalidade) VALUES (?, ?)";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, autor.getNome()); 
+            stmt.setString(2, autor.getNacionalidade()); 
+            stmt.executeUpdate();
+        }
+    }
+
+    public void atualizar(Autor autor) throws SQLException {
+        String sql = "UPDATE Autor SET Nome = ?, Nacionalidade = ? WHERE ID_Autor = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, autor.getNome()); 
+            stmt.setString(2, autor.getNacionalidade()); // Set the second parameter (Nacionalidade)
+            stmt.setInt(3, autor.getIdAutor()); // Set the third parameter (ID_Autor) for WHERE clause
+            stmt.executeUpdate(); 
+        }
+    }
+
+    public void deletar(int idAutor) throws SQLException {
+        String sql = "DELETE FROM Autor WHERE ID_Autor = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, idAutor); 
+            stmt.executeUpdate();
+    }
+
+    public List<Autor> obterTodos() throws SQLException {
+        List<Autor> lista = new ArrayList<>();
+        String sql = "SELECT ID_Autor, Nome, Nacionalidade FROM Autor ORDER BY ID_Autor ASC";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery(); 
+            while (rs.next()) { 
+                Autor autor = new Autor(); 
+                autor.setIdAutor(rs.getInt("ID_Autor"));
+                autor.setNome(rs.getString("Nome")); 
+                autor.setNacionalidade(rs.getString("Nacionalidade")); 
+                lista.add(autor); 
+            }
+        }
+        return lista;
+    }
+
+    public Optional<Autor> obterPeloId(int idAutor) throws SQLException {
+        String sql = "SELECT ID_Autor, Nome, Nacionalidade FROM Autor WHERE ID_Autor = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, idAutor); 
+            ResultSet rs = stmt.executeQuery(); 
+            if (rs.next()) { 
+                Autor autor = new Autor(); 
+                autor.setIdAutor(rs.getInt("ID_Autor"));
+                autor.setNome(rs.getString("Nome"));
+                autor.setNacionalidade(rs.getString("Nacionalidade"));
+                return Optional.of(autor); 
+            } else {
+                return Optional.empty(); 
+            }
+        }
+    }
+
+   
+    public void close() throws SQLException {
+        if (connection != null) {
+            connection.close();
+        }
+    }
+
+}
