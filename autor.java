@@ -1,13 +1,13 @@
-public class Autor {
+public class autor {
 
     private int idautor;
     private String nome;
     private String nacionalidade;
 
-    public Autor() {
+    public autor() {
     }
 
-    public Autor(int idautor, String nome, String nacionalidade) {
+    public autor(int idautor, String nome, String nacionalidade) {
         this.idautor = idautor;
         this.nome = nome;
         this.nacionalidade = nacionalidade;
@@ -45,7 +45,7 @@ public class Autor {
         if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        Autor autor = (Autor) obj;
+        autor autor = (autor) obj;
         return idautor == autor.idautor && nome.equals(autor.nome) && nacionalidade.equals(autor.nacionalidade);
     }
 
