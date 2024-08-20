@@ -6,7 +6,7 @@ public class autorDAO {
     private Connection connection;
 
     public autorDAO() throws SQLException {
-        this.connection = ConexaoBD.getInstance().getConnection();
+        this.connection = ConexBD.getInstance().getConnection();
     }
 
     public void inserirautor(autor autor) throws SQLException {
