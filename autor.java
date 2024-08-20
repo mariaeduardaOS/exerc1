@@ -1,20 +1,24 @@
 public class Autor {
-    private int idAutor;
+
+    private int id;
     private String nome;
     private String nacionalidade;
 
- public Autor(int idAutor, String nome, String nacionalidade) {
-        this.idAutor = idAutor;
+    public Autor() {
+    }
+
+    public Autor(int id, String nome, String nacionalidade) {
+        this.id = id;
         this.nome = nome;
         this.nacionalidade = nacionalidade;
     }
 
-    public int getIdAutor() {
-        return idAutor;
+    public int getId() {
+        return id;
     }
 
-    public void setIdAutor(int idAutor) {
-        this.idAutor = idAutor;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -31,5 +35,26 @@ public class Autor {
 
     public void setNacionalidade(String nacionalidade) {
         this.nacionalidade = nacionalidade;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Autor autor = (Autor) obj;
+        return id == autor.id && nome.equals(autor.nome) && nacionalidade.equals(autor.nacionalidade);
+    }
+
+    @Override
+    public String toString() {
+        return "Autor{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", nacionalidade='" + nacionalidade + '\'' +
+                '}';
     }
 }
